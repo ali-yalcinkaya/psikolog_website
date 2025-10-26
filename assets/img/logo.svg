@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Arka plan daire -->
+  <circle cx="100" cy="100" r="95" fill="#fce2ba" opacity="0.3"/>
+
+  <!-- Ana simge - Stilize beyin/kafa ve kalp kombinasyonu -->
+  <g transform="translate(100, 100)">
+    <!-- Kafa silueti -->
+    <path d="M -30,-40 Q -40,-40 -40,-25 Q -40,-10 -35,5 L -25,20 L 25,20 L 35,5 Q 40,-10 40,-25 Q 40,-40 30,-40 Q 25,-45 0,-45 Q -25,-45 -30,-40 Z"
+          fill="none"
+          stroke="#d4a574"
+          stroke-width="3"
+          stroke-linecap="round"/>
+
+    <!-- İç kalp simgesi -->
+    <path d="M 0,0 Q -8,-5 -12,-12 Q -15,-18 -12,-23 Q -9,-26 -5,-24 Q -2,-22 0,-18 Q 2,-22 5,-24 Q 9,-26 12,-23 Q 15,-18 12,-12 Q 8,-5 0,0 Z"
+          fill="#d4a574"/>
+
+    <!-- Beyin desen çizgileri (minimal) -->
+    <path d="M -20,-30 Q -15,-25 -20,-20"
+          fill="none"
+          stroke="#d4a574"
+          stroke-width="2"
+          stroke-linecap="round"/>
+    <path d="M 20,-30 Q 15,-25 20,-20"
+          fill="none"
+          stroke="#d4a574"
+          stroke-width="2"
+          stroke-linecap="round"/>
+
+    <!-- Alt dalga (huzur sembolü) -->
+    <path d="M -30,25 Q -20,30 -10,25 Q 0,20 10,25 Q 20,30 30,25"
+          fill="none"
+          stroke="#d4a574"
+          stroke-width="2.5"
+          stroke-linecap="round"/>
+  </g>
+
+  <!-- Metin (opsiyonel) -->
+  <text x="100" y="170"
+        font-family="Arial, sans-serif"
+        font-size="18"
+        font-weight="600"
+        text-anchor="middle"
+        fill="#2b2b2b">PSİKOLOJİ</text>
+</svg>

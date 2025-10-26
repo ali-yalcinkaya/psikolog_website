@@ -1,0 +1,20 @@
+# robots.txt - Psikolog Web Sitesi
+
+User-agent: *
+Allow: /
+
+# Ana sayfalar
+Allow: /index.html
+Allow: /hakkimda.html
+Allow: /calisma-alanlari.html
+Allow: /randevu.html
+Allow: /iletisim.html
+
+# Assets
+Allow: /assets/
+
+# Sitemap
+Sitemap: https://www.ornekklinik.com/sitemap.xml
+
+# Crawl-delay (isteğe bağlı - sunucu yükünü azaltmak için)
+# Crawl-delay: 1

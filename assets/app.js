@@ -1,0 +1,525 @@
+/**
+ * PSİKOLOG WEB SİTESİ - GLOBAL JAVASCRIPT
+ * Mobil menü, SSS akordeon, form doğrulama ve analytics
+ */
+
+// DataLayer için placeholder (GTM ile kullanılacak)
+window.dataLayer = window.dataLayer || [];
+
+// Sayfa yüklendiğinde çalışacak fonksiyonlar
+document.addEventListener('DOMContentLoaded', function() {
+  initMobileMenu();
+  initFAQ();
+  initAppointmentForm();
+  initContactForm();
+  initActiveNavLink();
+  triggerPageViewEvents();
+  initInstagramPlaceholder();
+});
+
+/**
+ * MOBİL MENÜ
+ * Hamburger menü toggle fonksiyonu
+ */
+function initMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+
+  if (!menuToggle || !navMenu) return;
+
+  menuToggle.addEventListener('click', function() {
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+
+    menuToggle.setAttribute('aria-expanded', !isExpanded);
+    navMenu.classList.toggle('active');
+
+    // Body scroll'u engelle/aç
+    if (!isExpanded) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Menü linklerine tıklandığında menüyü kapat
+  const menuLinks = navMenu.querySelectorAll('a');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      menuToggle.setAttribute('aria-expanded', 'false');
+      navMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ESC tuşu ile menüyü kapat
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+      menuToggle.setAttribute('aria-expanded', 'false');
+      navMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+}
+
+/**
+ * SSS AKORDEON
+ * Tek seferde bir soru açık kalacak şekilde
+ */
+function initFAQ() {
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  if (faqItems.length === 0) return;
+
+  faqItems.forEach((item, index) => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+
+    if (!question || !answer) return;
+
+    // İlk öğeyi varsayılan olarak aç
+    if (index === 0) {
+      item.classList.add('active');
+      question.setAttribute('aria-expanded', 'true');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+
+    question.addEventListener('click', function() {
+      const isActive = item.classList.contains('active');
+
+      // Tüm öğeleri kapat
+      faqItems.forEach(otherItem => {
+        otherItem.classList.remove('active');
+        const otherQuestion = otherItem.querySelector('.faq-question');
+        const otherAnswer = otherItem.querySelector('.faq-answer');
+        if (otherQuestion) otherQuestion.setAttribute('aria-expanded', 'false');
+        if (otherAnswer) otherAnswer.style.maxHeight = '0';
+      });
+
+      // Eğer tıklanan kapalıysa aç
+      if (!isActive) {
+        item.classList.add('active');
+        question.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+}
+
+/**
+ * AKTİF NAVİGASYON LİNKİ
+ * Mevcut sayfaya göre aktif linki işaretle
+ */
+function initActiveNavLink() {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.nav-menu a');
+
+  navLinks.forEach(link => {
+    const linkPage = link.getAttribute('href');
+    if (linkPage === currentPage ||
+        (currentPage === '' && linkPage === 'index.html') ||
+        (currentPage === '/' && linkPage === 'index.html')) {
+      link.classList.add('active');
+    }
+  });
+}
+
+/**
+ * RANDEVU FORMU DOĞRULAMA
+ * İstemci taraflı form validasyonu ve gönderim
+ */
+function initAppointmentForm() {
+  const form = document.getElementById('appointment-form');
+
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Formu temizle
+    clearFormErrors(form);
+
+    // Tüm alanları doğrula
+    let isValid = true;
+    const formData = {};
+
+    // Ad Soyad
+    const name = form.querySelector('#name');
+    if (!name.value.trim()) {
+      showError(name, 'Ad Soyad alanı zorunludur.');
+      isValid = false;
+    } else if (name.value.trim().length < 3) {
+      showError(name, 'Ad Soyad en az 3 karakter olmalıdır.');
+      isValid = false;
+    } else {
+      formData.name = name.value.trim();
+    }
+
+    // E-posta
+    const email = form.querySelector('#email');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim()) {
+      showError(email, 'E-posta adresi zorunludur.');
+      isValid = false;
+    } else if (!emailPattern.test(email.value.trim())) {
+      showError(email, 'Geçerli bir e-posta adresi giriniz.');
+      isValid = false;
+    } else {
+      formData.email = email.value.trim();
+    }
+
+    // Telefon
+    const phone = form.querySelector('#phone');
+    const phonePattern = /^[0-9]{10,11}$/;
+    const cleanPhone = phone.value.replace(/\s|-|\(|\)/g, '');
+    if (!cleanPhone) {
+      showError(phone, 'Telefon numarası zorunludur.');
+      isValid = false;
+    } else if (!phonePattern.test(cleanPhone)) {
+      showError(phone, 'Geçerli bir telefon numarası giriniz (10-11 haneli).');
+      isValid = false;
+    } else {
+      formData.phone = cleanPhone;
+    }
+
+    // Tercih edilen tarih
+    const date = form.querySelector('#preferred-date');
+    if (date && date.value) {
+      formData.preferredDate = date.value;
+    }
+
+    // Tercih edilen saat
+    const time = form.querySelector('#preferred-time');
+    if (time && time.value) {
+      formData.preferredTime = time.value;
+    }
+
+    // Danışma konusu
+    const topic = form.querySelector('#topic');
+    if (topic && topic.value) {
+      formData.topic = topic.value;
+    }
+
+    // Mesaj
+    const message = form.querySelector('#message');
+    if (message && message.value.trim()) {
+      formData.message = message.value.trim();
+    }
+
+    // KVKK onayı
+    const consent = form.querySelector('#consent');
+    if (!consent.checked) {
+      showError(consent.parentElement, 'KVKK aydınlatma metnini okuyup onaylamanız gerekmektedir.');
+      isValid = false;
+    } else {
+      formData.consent = true;
+    }
+
+    // Form geçerli değilse dur
+    if (!isValid) {
+      return;
+    }
+
+    // Form geçerli - Gönderim simülasyonu
+    console.log('Form Verileri:', formData);
+
+    // Google Ads dönüşüm eventi
+    window.dataLayer.push({
+      event: 'lead_submit',
+      form_type: 'appointment',
+      form_data: formData
+    });
+
+    // Başarı mesajını göster
+    showSuccessMessage(form);
+
+    // Formu sıfırla
+    form.reset();
+
+    // Gerçek ortamda burada API'ye POST isteği atılacak:
+    /*
+    fetch('/api/appointments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      showSuccessMessage(form);
+      form.reset();
+    })
+    .catch(error => {
+      console.error('Hata:', error);
+      alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');
+    });
+    */
+  });
+}
+
+/**
+ * İLETİŞİM FORMU DOĞRULAMA
+ * Basit iletişim formu için
+ */
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+
+  if (!form) return;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    clearFormErrors(form);
+
+    let isValid = true;
+    const formData = {};
+
+    // Ad Soyad
+    const name = form.querySelector('#contact-name');
+    if (name) {
+      if (!name.value.trim()) {
+        showError(name, 'Ad Soyad alanı zorunludur.');
+        isValid = false;
+      } else {
+        formData.name = name.value.trim();
+      }
+    }
+
+    // E-posta
+    const email = form.querySelector('#contact-email');
+    if (email) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim()) {
+        showError(email, 'E-posta adresi zorunludur.');
+        isValid = false;
+      } else if (!emailPattern.test(email.value.trim())) {
+        showError(email, 'Geçerli bir e-posta adresi giriniz.');
+        isValid = false;
+      } else {
+        formData.email = email.value.trim();
+      }
+    }
+
+    // Mesaj
+    const message = form.querySelector('#contact-message');
+    if (message) {
+      if (!message.value.trim()) {
+        showError(message, 'Mesaj alanı zorunludur.');
+        isValid = false;
+      } else if (message.value.trim().length < 10) {
+        showError(message, 'Mesaj en az 10 karakter olmalıdır.');
+        isValid = false;
+      } else {
+        formData.message = message.value.trim();
+      }
+    }
+
+    if (!isValid) return;
+
+    console.log('İletişim Form Verileri:', formData);
+
+    // Analytics event
+    window.dataLayer.push({
+      event: 'contact_submit',
+      form_type: 'contact'
+    });
+
+    showSuccessMessage(form);
+    form.reset();
+  });
+}
+
+/**
+ * FORM HATA GÖSTERME
+ */
+function showError(field, message) {
+  field.setAttribute('aria-invalid', 'true');
+
+  // Hata mesajı elementi oluştur veya güncelle
+  let errorElement = field.parentElement.querySelector('.form-error');
+
+  if (!errorElement) {
+    errorElement = document.createElement('div');
+    errorElement.className = 'form-error';
+    field.parentElement.appendChild(errorElement);
+  }
+
+  errorElement.textContent = message;
+  errorElement.classList.add('visible');
+
+  // İlk hataya odaklan
+  if (!document.querySelector('[aria-invalid="true"]:focus')) {
+    field.focus();
+  }
+}
+
+/**
+ * FORM HATALARINI TEMİZLE
+ */
+function clearFormErrors(form) {
+  const errorElements = form.querySelectorAll('.form-error');
+  errorElements.forEach(el => {
+    el.classList.remove('visible');
+    el.textContent = '';
+  });
+
+  const invalidFields = form.querySelectorAll('[aria-invalid="true"]');
+  invalidFields.forEach(field => {
+    field.setAttribute('aria-invalid', 'false');
+  });
+}
+
+/**
+ * BAŞARI MESAJI GÖSTER
+ */
+function showSuccessMessage(form) {
+  // Mevcut başarı mesajını kaldır
+  const existingSuccess = form.querySelector('.form-success');
+  if (existingSuccess) {
+    existingSuccess.remove();
+  }
+
+  // Yeni başarı mesajı oluştur
+  const successDiv = document.createElement('div');
+  successDiv.className = 'form-success';
+  successDiv.setAttribute('role', 'alert');
+  successDiv.innerHTML = `
+    <span class="form-success-icon">✓</span>
+    <strong>Mesajınız başarıyla gönderildi!</strong>
+    <p>En kısa sürede size dönüş yapacağız. Teşekkür ederiz.</p>
+  `;
+
+  form.insertBefore(successDiv, form.firstChild);
+
+  // Başarı mesajına scroll
+  successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  // 10 saniye sonra mesajı kaldır
+  setTimeout(() => {
+    successDiv.style.transition = 'opacity 0.5s';
+    successDiv.style.opacity = '0';
+    setTimeout(() => successDiv.remove(), 500);
+  }, 10000);
+}
+
+/**
+ * SAYFA GÖRÜNTÜLEME EVENTLERİ
+ * Randevu sayfası için lead_view eventi
+ */
+function triggerPageViewEvents() {
+  const currentPage = window.location.pathname;
+
+  // Randevu sayfası görüntüleme eventi
+  if (currentPage.includes('randevu.html')) {
+    window.dataLayer.push({
+      event: 'lead_view',
+      page: 'appointment'
+    });
+  }
+}
+
+/**
+ * INSTAGRAM PLACEHOLDER FEED
+ * Gerçek Instagram embed kullanılmıyorsa bu fonksiyon çalışır
+ */
+function initInstagramPlaceholder() {
+  const instagramContainer = document.querySelector('.instagram-posts');
+
+  if (!instagramContainer) return;
+
+  // Eğer container boşsa placeholder kartlar oluştur
+  if (instagramContainer.children.length === 0) {
+    const placeholderPosts = [
+      {
+        image: 'assets/img/insta1.webp',
+        text: 'Stres yönetimi ile ilgili ipuçları ve teknikleri paylaşıyorum. Günlük yaşamda uygulayabileceğiniz basit ama etkili yöntemler.',
+        link: 'https://www.instagram.com/p/PLACEHOLDER1/'
+      },
+      {
+        image: 'assets/img/insta2.webp',
+        text: 'Sağlıklı iletişim becerileri hakkında. İlişkilerinizi güçlendirmek için dikkat etmeniz gerekenler.',
+        link: 'https://www.instagram.com/p/PLACEHOLDER2/'
+      },
+      {
+        image: 'assets/img/insta3.webp',
+        text: 'Farkındalık ve mindfulness pratiği. Şimdiki ana odaklanmanın faydaları ve nasıl yapılacağı.',
+        link: 'https://www.instagram.com/p/PLACEHOLDER3/'
+      },
+      {
+        image: 'assets/img/insta4.webp',
+        text: 'Anksiyete ile başa çıkma yöntemleri. Endişelerinizi yönetmenize yardımcı olacak pratik öneriler.',
+        link: 'https://www.instagram.com/p/PLACEHOLDER4/'
+      }
+    ];
+
+    placeholderPosts.forEach(post => {
+      const card = createInstagramCard(post);
+      instagramContainer.appendChild(card);
+    });
+  }
+}
+
+/**
+ * INSTAGRAM KART OLUŞTUR
+ */
+function createInstagramCard(post) {
+  const card = document.createElement('div');
+  card.className = 'instagram-card';
+
+  card.innerHTML = `
+    <img src="${post.image}" alt="Instagram gönderisi" class="instagram-image" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%22280%22%3E%3Crect fill=%22%23fce2ba%22 width=%22280%22 height=%22280%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%232b2b2b%22%3EInstagram G%C3%B6rsel%3C/text%3E%3C/svg%3E'">
+    <div class="instagram-content">
+      <p class="instagram-text">${post.text}</p>
+      <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="instagram-link">
+        Instagram'da Gör →
+      </a>
+    </div>
+  `;
+
+  return card;
+}
+
+/**
+ * SMOOTH SCROLL
+ * Sayfa içi linklere yumuşak geçiş (opsiyonel)
+ */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+
+    if (href === '#') return;
+
+    const target = document.querySelector(href);
+
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+/**
+ * HEADER SCROLL EFEKTİ (Opsiyonel)
+ * Scroll edildiğinde header'a gölge ekle
+ */
+let lastScroll = 0;
+const header = document.querySelector('.site-header');
+
+window.addEventListener('scroll', function() {
+  const currentScroll = window.pageYOffset;
+
+  if (currentScroll > 50) {
+    header.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.1)';
+  } else {
+    header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.08)';
+  }
+
+  lastScroll = currentScroll;
+});
+
+// Console'da bilgi
+console.log('%c🌟 Psikolog Web Sitesi', 'font-size: 16px; font-weight: bold; color: #d4a574;');
+console.log('%cErişilebilir, hızlı ve modern bir web deneyimi.', 'color: #5a5a5a;');
