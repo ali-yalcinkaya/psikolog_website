@@ -520,6 +520,171 @@ window.addEventListener('scroll', function() {
   lastScroll = currentScroll;
 });
 
+/**
+ * BLOG FONKSİYONLARI
+ * Blog sayfası için arama ve filtreleme
+ */
+
+// Blog verilerini sakla
+let allBlogPosts = [];
+
+/**
+ * BLOG BAŞLAT
+ */
+function initBlog() {
+  const blogGrid = document.querySelector('.blog-grid');
+  if (!blogGrid) return;
+
+  // Tüm blog kartlarını al ve sakla
+  allBlogPosts = Array.from(blogGrid.querySelectorAll('.blog-card'));
+
+  // Arama
+  const searchInput = document.getElementById('blog-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', handleBlogSearch);
+  }
+
+  // Kategori filtreleri
+  const filterButtons = document.querySelectorAll('.blog-filter-btn');
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', handleBlogFilter);
+  });
+}
+
+/**
+ * BLOG ARAMA
+ */
+function handleBlogSearch(e) {
+  const searchTerm = e.target.value.toLowerCase().trim();
+  const activeCategory = document.querySelector('.blog-filter-btn.active')?.dataset.category || 'all';
+
+  filterBlogPosts(searchTerm, activeCategory);
+}
+
+/**
+ * BLOG FİLTRELEME
+ */
+function handleBlogFilter(e) {
+  const button = e.currentTarget;
+  const category = button.dataset.category;
+
+  // Aktif butonu güncelle
+  document.querySelectorAll('.blog-filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  button.classList.add('active');
+
+  // Arama terimini al
+  const searchInput = document.getElementById('blog-search');
+  const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+  filterBlogPosts(searchTerm, category);
+}
+
+/**
+ * BLOG GÖNDERİLERİNİ FİLTRELE
+ */
+function filterBlogPosts(searchTerm, category) {
+  const blogGrid = document.querySelector('.blog-grid');
+  let visibleCount = 0;
+
+  allBlogPosts.forEach(post => {
+    const title = post.querySelector('.blog-card-title')?.textContent.toLowerCase() || '';
+    const excerpt = post.querySelector('.blog-excerpt')?.textContent.toLowerCase() || '';
+    const postCategory = post.dataset.category || '';
+
+    // Kategori kontrolü
+    const categoryMatch = category === 'all' || postCategory === category;
+
+    // Arama kontrolü
+    const searchMatch = !searchTerm || title.includes(searchTerm) || excerpt.includes(searchTerm);
+
+    // Her iki koşul da sağlanırsa göster
+    if (categoryMatch && searchMatch) {
+      post.style.display = '';
+      visibleCount++;
+    } else {
+      post.style.display = 'none';
+    }
+  });
+
+  // Sonuç yoksa mesaj göster
+  updateBlogEmptyState(visibleCount);
+}
+
+/**
+ * BOŞ DURUM MESAJI
+ */
+function updateBlogEmptyState(visibleCount) {
+  const blogGrid = document.querySelector('.blog-grid');
+  let emptyState = document.querySelector('.blog-empty');
+
+  if (visibleCount === 0) {
+    if (!emptyState) {
+      emptyState = document.createElement('div');
+      emptyState.className = 'blog-empty';
+      emptyState.innerHTML = `
+        <div class="blog-empty-icon">🔍</div>
+        <h3>Sonuç Bulunamadı</h3>
+        <p>Aradığınız kriterlere uygun blog yazısı bulunamadı. Lütfen farklı bir arama terimi veya kategori deneyin.</p>
+      `;
+      blogGrid.parentElement.appendChild(emptyState);
+    }
+    emptyState.style.display = 'block';
+  } else {
+    if (emptyState) {
+      emptyState.style.display = 'none';
+    }
+  }
+}
+
+/**
+ * BLOG PAYLAŞIM BUTONLARI
+ */
+function initBlogShare() {
+  const shareButtons = document.querySelectorAll('.share-btn');
+
+  shareButtons.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(document.title);
+      const platform = this.classList.contains('twitter') ? 'twitter' :
+                      this.classList.contains('facebook') ? 'facebook' :
+                      this.classList.contains('linkedin') ? 'linkedin' :
+                      this.classList.contains('whatsapp') ? 'whatsapp' : '';
+
+      let shareUrl = '';
+
+      switch(platform) {
+        case 'twitter':
+          shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+          break;
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+          break;
+        case 'linkedin':
+          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+          break;
+        case 'whatsapp':
+          shareUrl = `https://wa.me/?text=${title}%20${url}`;
+          break;
+      }
+
+      if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+      }
+    });
+  });
+}
+
+// Sayfa yüklendiğinde blog fonksiyonlarını başlat
+document.addEventListener('DOMContentLoaded', function() {
+  initBlog();
+  initBlogShare();
+});
+
 // Console'da bilgi
 console.log('%c🌟 Psikolog Web Sitesi', 'font-size: 16px; font-weight: bold; color: #d4a574;');
 console.log('%cErişilebilir, hızlı ve modern bir web deneyimi.', 'color: #5a5a5a;');
