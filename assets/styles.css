@@ -1494,8 +1494,22 @@ img {
 
 /* Mobile (767px ve altı) */
 @media (max-width: 767px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1002;
+  }
+
+  .header-container {
+    position: relative;
+    z-index: 1003;
+  }
+
   .menu-toggle {
     display: block;
+    position: relative;
+    z-index: 1003;
+    margin-left: auto;
   }
 
   .nav-menu {
@@ -1504,7 +1518,7 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--color-bg);
+    background-color: #ffffff;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1512,6 +1526,7 @@ img {
     transform: translateX(-100%);
     transition: transform var(--transition-slow);
     padding: var(--space-xl);
+    z-index: 1001;
   }
 
   .nav-menu.active {
