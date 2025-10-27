@@ -432,7 +432,6 @@ img {
 
 .card-header {
   margin-bottom: var(--space-md);
-  text-align: center;
 }
 
 .card-icon {
@@ -443,30 +442,45 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto var(--space-sm) auto;
+  margin-bottom: var(--space-sm);
   font-size: 1.5rem;
 }
 
 .card-title {
   font-size: 1.25rem;
   margin-bottom: var(--space-xs);
-  text-align: center;
 }
 
 .card-body {
   flex: 1;
   color: var(--color-text-light);
+}
+
+/* İletişim kartları için özel stiller (ortalanmış) */
+.contact-cards .card-header {
+  text-align: center;
+}
+
+.contact-cards .card-icon {
+  margin: 0 auto var(--space-sm) auto;
+}
+
+.contact-cards .card-title {
+  text-align: center;
+}
+
+.contact-cards .card-body {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
-.card-body > p {
+.contact-cards .card-body > p {
   width: 100%;
 }
 
-.card-body .btn {
+.contact-cards .card-body .btn {
   margin-top: var(--space-md);
   min-width: 180px;
 }
@@ -1494,7 +1508,7 @@ img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--space-xl);
+    gap: var(--space-md);
     transform: translateX(-100%);
     transition: transform var(--transition-slow);
     padding: var(--space-xl);
@@ -1506,25 +1520,6 @@ img {
 
   .nav-menu a {
     font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  /* Mobilde Randevu Al butonunun görünürlüğü */
-  .nav-menu .btn-primary {
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-  }
-
-  /* Danışan yorumları mobil düzenleme */
-  .testimonial {
-    padding: var(--space-md);
-  }
-
-  .testimonial-quote {
-    font-size: 1rem;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
   }
 
   .profile-section {
