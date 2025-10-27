@@ -432,6 +432,7 @@ img {
 
 .card-header {
   margin-bottom: var(--space-md);
+  text-align: center;
 }
 
 .card-icon {
@@ -442,18 +443,32 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--space-sm);
+  margin: 0 auto var(--space-sm) auto;
   font-size: 1.5rem;
 }
 
 .card-title {
   font-size: 1.25rem;
   margin-bottom: var(--space-xs);
+  text-align: center;
 }
 
 .card-body {
   flex: 1;
   color: var(--color-text-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.card-body > p {
+  width: 100%;
+}
+
+.card-body .btn {
+  margin-top: var(--space-md);
+  min-width: 180px;
 }
 
 .card-footer {
@@ -1479,7 +1494,7 @@ img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--space-sm);
+    gap: var(--space-xl);
     transform: translateX(-100%);
     transition: transform var(--transition-slow);
     padding: var(--space-xl);
@@ -1490,13 +1505,14 @@ img {
   }
 
   .nav-menu a {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    font-weight: 600;
   }
 
   /* Mobilde Randevu Al butonunun görünürlüğü */
   .nav-menu .btn-primary {
-    font-size: 1.25rem;
-    padding: 0.875rem 1.75rem;
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
   }
 
   /* Danışan yorumları mobil düzenleme */
