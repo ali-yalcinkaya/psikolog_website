@@ -249,6 +249,27 @@ img {
   background-color: var(--color-accent);
 }
 
+/* Navigasyon içindeki buton stilleri - kontrast düzeltmesi */
+.nav-menu .btn-primary {
+  padding: 0.75rem 1.5rem;
+  margin: 0;
+  display: inline-block;
+}
+
+.nav-menu .btn-primary:hover {
+  color: #ffffff;
+}
+
+.nav-menu .btn-primary:focus-visible {
+  outline: 2px solid var(--color-accent-dark);
+  outline-offset: 2px;
+}
+
+/* Randevu Al butonunda aktif durumda alt çizgi gösterme */
+.nav-menu .btn-primary.active::after {
+  display: none;
+}
+
 /* Mobil Menü Toggle */
 .menu-toggle {
   display: none;
