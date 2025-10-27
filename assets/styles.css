@@ -1479,7 +1479,7 @@ img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: var(--space-md);
+    gap: var(--space-sm);
     transform: translateX(-100%);
     transition: transform var(--transition-slow);
     padding: var(--space-xl);
@@ -1490,7 +1490,25 @@ img {
   }
 
   .nav-menu a {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  /* Mobilde Randevu Al butonunun görünürlüğü */
+  .nav-menu .btn-primary {
+    font-size: 1.25rem;
+    padding: 0.875rem 1.75rem;
+  }
+
+  /* Danışan yorumları mobil düzenleme */
+  .testimonial {
+    padding: var(--space-md);
+  }
+
+  .testimonial-quote {
+    font-size: 1rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .profile-section {
