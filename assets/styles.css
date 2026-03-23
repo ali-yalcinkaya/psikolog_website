@@ -1505,6 +1505,13 @@ img {
   }
 }
 
+/* Instagram Embed Grid - Responsive */
+@media (max-width: 991px) {
+  .instagram-embed-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* Mobile (767px ve altı) */
 @media (max-width: 767px) {
   .site-header {
