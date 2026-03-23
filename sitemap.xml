@@ -2,57 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Ana Sayfa -->
   <url>
-    <loc>https://www.ornekklinik.com/</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://ali-yalcinkaya.github.io/psikolog_website/</loc>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Hakkımda -->
   <url>
-    <loc>https://www.ornekklinik.com/hakkimda.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://ali-yalcinkaya.github.io/psikolog_website/hakkimda.html</loc>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Çalışma Alanları -->
   <url>
-    <loc>https://www.ornekklinik.com/calisma-alanlari.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://ali-yalcinkaya.github.io/psikolog_website/calisma-alanlari.html</loc>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Randevu Al -->
   <url>
-    <loc>https://www.ornekklinik.com/randevu.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://ali-yalcinkaya.github.io/psikolog_website/randevu.html</loc>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- İletişim -->
   <url>
-    <loc>https://www.ornekklinik.com/iletisim.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://ali-yalcinkaya.github.io/psikolog_website/iletisim.html</loc>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <!-- Blog -->
   <url>
-    <loc>https://www.ornekklinik.com/blog.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://ali-yalcinkaya.github.io/psikolog_website/blog.html</loc>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blog Detay (Örnek) -->
   <url>
-    <loc>https://www.ornekklinik.com/blog-detay.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <loc>https://ali-yalcinkaya.github.io/psikolog_website/blog-detay.html</loc>
+    <lastmod>2026-03-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <!-- SSS -->
+  <url>
+    <loc>https://ali-yalcinkaya.github.io/psikolog_website/sss.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
