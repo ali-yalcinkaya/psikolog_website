@@ -727,6 +727,49 @@ document.addEventListener('DOMContentLoaded', function() {
   initBlogShare();
 });
 
+/**
+ * DANIŞAN YORUMLARI
+ * Metin genişletme/daraltma ve modal fonksiyonları
+ */
+function toggleTestimonial(button) {
+  const quote = button.previousElementSibling;
+  const isExpanded = quote.classList.contains('expanded');
+
+  if (isExpanded) {
+    quote.classList.remove('expanded');
+    button.textContent = 'Devamını Oku';
+  } else {
+    quote.classList.add('expanded');
+    button.textContent = 'Daralt';
+  }
+}
+
+function openTestimonialsModal() {
+  const modal = document.getElementById('testimonialsModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeTestimonialsModal(event) {
+  const modal = document.getElementById('testimonialsModal');
+  if (!event || event.target === modal || event.target.classList.contains('testimonials-modal-close')) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// ESC tuşu ile testimonials modalı kapat
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('testimonialsModal');
+    if (modal && modal.classList.contains('active')) {
+      closeTestimonialsModal();
+    }
+  }
+});
+
 // Console'da bilgi
 console.log('%c🌟 Psikolog Web Sitesi', 'font-size: 16px; font-weight: bold; color: #d4a574;');
 console.log('%cErişilebilir, hızlı ve modern bir web deneyimi.', 'color: #5a5a5a;');
