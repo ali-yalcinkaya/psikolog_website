@@ -903,6 +903,19 @@ img {
   color: #ffffff;
 }
 
+/* WhatsApp SVG Icon */
+.whatsapp-icon {
+  flex-shrink: 0;
+}
+
+.footer-contact-item .whatsapp-icon {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-btn.whatsapp svg {
+  flex-shrink: 0;
+}
+
 /* ============================================
    MAP EMBED
    ============================================ */

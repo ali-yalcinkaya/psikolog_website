@@ -9,12 +9,13 @@ Allow: /hakkimda.html
 Allow: /calisma-alanlari.html
 Allow: /randevu.html
 Allow: /iletisim.html
+Allow: /sss.html
 
 # Assets
 Allow: /assets/
 
 # Sitemap
-Sitemap: https://www.ornekklinik.com/sitemap.xml
+Sitemap: https://ali-yalcinkaya.github.io/psikolog_website/sitemap.xml
 
 # Crawl-delay (isteğe bağlı - sunucu yükünü azaltmak için)
 # Crawl-delay: 1

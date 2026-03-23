@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initActiveNavLink();
   triggerPageViewEvents();
   initInstagramPlaceholder();
+  initDateRestrictions();
 });
 
 /**
@@ -477,6 +478,47 @@ function createInstagramCard(post) {
   `;
 
   return card;
+}
+
+/**
+ * RANDEVU TARİH KISITLAMALARI
+ * Pazar günlerini devre dışı bırak, çalışma saatleri: Pazartesi-Cumartesi 09:00-21:00
+ */
+function initDateRestrictions() {
+  const dateInput = document.getElementById('preferred-date');
+  if (!dateInput) return;
+
+  // Minimum tarih: bugün
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  dateInput.setAttribute('min', `${yyyy}-${mm}-${dd}`);
+
+  // Pazar günü seçildiğinde uyarı ver
+  dateInput.addEventListener('change', function() {
+    if (this.value) {
+      const selectedDate = new Date(this.value + 'T00:00:00');
+      if (selectedDate.getDay() === 0) {
+        // Pazar günü seçildi
+        let errorEl = this.parentElement.querySelector('.form-error');
+        if (!errorEl) {
+          errorEl = document.createElement('div');
+          errorEl.className = 'form-error';
+          this.parentElement.appendChild(errorEl);
+        }
+        errorEl.textContent = 'Pazar günleri kapalıyız. Lütfen başka bir gün seçiniz.';
+        errorEl.classList.add('visible');
+        this.value = '';
+      } else {
+        const errorEl = this.parentElement.querySelector('.form-error');
+        if (errorEl) {
+          errorEl.classList.remove('visible');
+          errorEl.textContent = '';
+        }
+      }
+    }
+  });
 }
 
 /**
