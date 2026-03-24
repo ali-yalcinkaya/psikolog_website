@@ -29,6 +29,11 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
 
+  <!-- Google Fonts: Lora (Serif) + Inter (Sans-Serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="assets/styles.css">
 
@@ -123,10 +128,19 @@
 
   <!-- Main Content -->
   <main id="main-content">
+    <!-- Hero Karşılama Alanı -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="reveal">Profesyonel Psikolojik Danışmanlık</h1>
+        <p class="reveal">Kendinizi daha iyi anlamak ve yaşam kalitenizi artırmak için güvenli bir alan. Bilimsel yöntemlerle, size özel bir danışmanlık süreci başlatalım.</p>
+        <a href="randevu.html" class="btn btn-primary btn-large reveal">Randevu Al</a>
+      </div>
+    </section>
+
     <!-- Kısa Hakkımda Bölümü -->
     <section class="section">
       <div class="container">
-        <div class="profile-section">
+        <div class="profile-section reveal">
           <img src="assets/img/profil.webp"
                alt="Psikolog Meryem Zeynep Uğurlu - Profil Fotoğrafı"
                class="profile-image"
@@ -154,10 +168,43 @@
       </div>
     </section>
 
-    <!-- Çalışma Alanları -->
+    <!-- Terapötik Yaklaşımım -->
     <section class="section section-alt">
       <div class="container">
-        <h2 class="text-center mb-md">Çalışma Alanlarım</h2>
+        <h2 class="text-center mb-md reveal">Terapötik Yaklaşımım</h2>
+        <p class="text-center mb-lg reveal" style="max-width: 700px; margin-left: auto; margin-right: auto; color: var(--color-text-light);">
+          Danışmanlık sürecimde temel aldığım değerler ve ilkeler.
+        </p>
+        <div class="approach-grid">
+          <div class="approach-card reveal">
+            <div class="approach-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Gizlilik</h3>
+            <p>Paylaştığınız her bilgi, mesleki etik kurallar çerçevesinde mutlak gizlilik ile korunur.</p>
+          </div>
+          <div class="approach-card reveal">
+            <div class="approach-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <h3>Empati</h3>
+            <p>Yargısız ve koşulsuz kabul ile sizin bakış açınızdan dünyayı anlamaya çalışırım.</p>
+          </div>
+          <div class="approach-card reveal">
+            <div class="approach-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3>Bilimsellik</h3>
+            <p>Kanıta dayalı terapi yöntemleri ve güncel akademik araştırmaları temel alarak çalışırım.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Çalışma Alanları -->
+    <section class="section">
+      <div class="container">
+        <h2 class="text-center mb-md reveal">Çalışma Alanlarım</h2>
         <p class="text-center mb-lg" style="max-width: 700px; margin-left: auto; margin-right: auto; color: var(--color-text-light);">
           Farklı yaşam zorluklarında profesyonel destek sunuyorum. Her bireyin ihtiyacına özel danışmanlık programları hazırlıyorum.
         </p>
@@ -268,90 +315,63 @@
     <!-- Danışan Yorumları -->
     <section class="section">
       <div class="container">
-        <h2 class="text-center mb-md">Danışanlarımın Görüşleri</h2>
-        <p class="text-center mb-lg" style="max-width: 700px; margin-left: auto; margin-right: auto; color: var(--color-text-light);">
+        <h2 class="text-center mb-md reveal">Danışanlarımın Görüşleri</h2>
+        <p class="text-center mb-lg reveal" style="max-width: 700px; margin-left: auto; margin-right: auto; color: var(--color-text-light);">
           Danışmanlık sürecinden geçen danışanlarımın deneyimleri.
         </p>
 
-        <div class="grid grid-3">
-          <div class="testimonial">
-            <div class="testimonial-quote-wrapper">
-              <p class="testimonial-quote testimonial-truncate">
-                "Meryem Hanım'dan 2 yılı aşkın süredir bireysel danışmanlık alıyorum. Bu süreçte, hayatımı olumsuz etkileyen birçok konuyu fark etmemi ve çözmemi sağladı. İlk görüşmeden itibaren yaklaşımı, mesleki yetkinliği ve samimiyetiyle kendimi rahat hissettim. İç dünyamdaki sorunların kökenine inerek bana doğru yolları bulmamda yardımcı oldu. Kaçındığım konuları rahatsızlık vermeden, profesyonel bir şekilde ele aldı ve çözmemi sağladı. Görüşmelerde duygularımı anlamaya verdiği önem ve mesleğine olan hakimiyeti her an hissediliyor. Etik değerlere bağlı, güvenilir ve işinde uzman bir psikolog olarak kendisini çevremdekilere gönül rahatlığıyla tavsiye ettim ve etmeye devam ediyorum. Hayır diyebilmeyi, sınır çizmeyi ve kendime değer vermeyi Meryem Hanım sayesinde öğrendim. İç dünyasında destek arayan herkese kendisini tavsiye ederim. Danışmanlık sürecimin sonuna kadar memnuniyet ile devam edeceğime inanıyorum."
-              </p>
-              <button class="testimonial-toggle" onclick="toggleTestimonial(this)">Devamını Oku</button>
+        <div class="testimonial-slider reveal" id="testimonialSlider">
+          <div class="testimonial-slider-track">
+            <div class="testimonial-slide">
+              <div class="testimonial">
+                <p class="testimonial-quote">
+                  "Meryem Hanım'dan 2 yılı aşkın süredir bireysel danışmanlık alıyorum. Bu süreçte, hayatımı olumsuz etkileyen birçok konuyu fark etmemi ve çözmemi sağladı. İlk görüşmeden itibaren yaklaşımı, mesleki yetkinliği ve samimiyetiyle kendimi rahat hissettim. Hayır diyebilmeyi, sınır çizmeyi ve kendime değer vermeyi Meryem Hanım sayesinde öğrendim."
+                </p>
+                <p class="testimonial-author">— F.I.</p>
+              </div>
             </div>
-            <p class="testimonial-author">— F.I.</p>
-          </div>
-
-          <div class="testimonial">
-            <div class="testimonial-quote-wrapper">
-              <p class="testimonial-quote testimonial-truncate">
-                "Meryem Hanım'a bir arkadaşımın yönlendirmesiyle başvurdum. Öncelikle çok mutsuz hissetmemden dolayı ve çok sık pozitif ile negatif duygular arasında geçiş yaşamamdan dolayı başvurmuştum. Fakat sorunların kökenine inerek aslında nereden kaynaklandığını beraber fark ettik. Yaşadığım duyguları anlamama ve duygunun içinde kalmama çok yardımcı oldu ve hala da yardımını almaya devam ediyorum. Görüşmede kaçmak istediğim konuların aslında üzerinde durulması gereken konular olması ile birlikte kendisi bu durumu oldukça profesyonel yönetiyor. Danışanının anlattıklarını bakış açısını duygularını anlamak için emek veren başarılı bir psikolog olduğunu düşünüyorum. Etik kurallara da uygun çalıştığını söylemem gerekli. Kendisiyle neredeyse 2 yıldır devam ettirdiğimiz görüşmelerden ben kendi şahsıma oldukça faydasını gördüm ve hayatımda çok şey değişti. Kendisini daha önce de çevremdeki insanlara tavsiye etmiştim."
-              </p>
-              <button class="testimonial-toggle" onclick="toggleTestimonial(this)">Devamını Oku</button>
+            <div class="testimonial-slide">
+              <div class="testimonial">
+                <p class="testimonial-quote">
+                  "Meryem Hanım'a bir arkadaşımın yönlendirmesiyle başvurdum. Yaşadığım duyguları anlamama ve duygunun içinde kalmama çok yardımcı oldu. Danışanının anlattıklarını, bakış açısını, duygularını anlamak için emek veren başarılı bir psikolog olduğunu düşünüyorum. Hayatımda çok şey değişti."
+                </p>
+                <p class="testimonial-author">— H.C.</p>
+              </div>
             </div>
-            <p class="testimonial-author">— H.C.</p>
-          </div>
-
-          <div class="testimonial">
-            <div class="testimonial-quote-wrapper">
-              <p class="testimonial-quote">
-                "6 şubat depreminden sonra çok zor günler geçirdiğim dönemde karşıma çıkan, sonrasında da çok faydasını gördüğüm çok içten, sorunlara çözüm odaklı ve samimi bir psikolog. Kendisini tanıdığım için şanslıyım."
-              </p>
+            <div class="testimonial-slide">
+              <div class="testimonial">
+                <p class="testimonial-quote">
+                  "6 şubat depreminden sonra çok zor günler geçirdiğim dönemde karşıma çıkan, sonrasında da çok faydasını gördüğüm çok içten, sorunlara çözüm odaklı ve samimi bir psikolog. Kendisini tanıdığım için şanslıyım."
+                </p>
+                <p class="testimonial-author">— D.A.</p>
+              </div>
             </div>
-            <p class="testimonial-author">— D.A.</p>
+            <div class="testimonial-slide">
+              <div class="testimonial">
+                <p class="testimonial-quote">
+                  "Harika bir insan, ilk başladığımda tedirgin ve çekingendim ama aldığım pozitif enerji ile kendimi rahat ve güvende hissettim. Çok faydasını gördüm, iyi ki tanımışım sizi..."
+                </p>
+                <p class="testimonial-author">— E.O.</p>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="text-center" style="margin-top: var(--space-lg);">
-          <button class="btn btn-primary" onclick="openTestimonialsModal()">Tüm Yorumları Gör</button>
+          <div class="testimonial-slider-nav">
+            <button class="slider-btn slider-prev" aria-label="Önceki yorum">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="slider-dots" id="sliderDots"></div>
+            <button class="slider-btn slider-next" aria-label="Sonraki yorum">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Danışan Yorumları Modal -->
-    <div class="testimonials-modal-overlay" id="testimonialsModal" onclick="closeTestimonialsModal(event)">
-      <div class="testimonials-modal">
-        <button class="testimonials-modal-close" onclick="closeTestimonialsModal()" aria-label="Kapat">&times;</button>
-        <h2 style="margin-bottom: var(--space-md); color: var(--color-primary);">Danışan Yorumları</h2>
-
-        <div class="testimonials-modal-content">
-          <div class="testimonial" style="margin-bottom: var(--space-md);">
-            <p class="testimonial-quote">
-              "Meryem Hanım'dan 2 yılı aşkın süredir bireysel danışmanlık alıyorum. Bu süreçte, hayatımı olumsuz etkileyen birçok konuyu fark etmemi ve çözmemi sağladı. İlk görüşmeden itibaren yaklaşımı, mesleki yetkinliği ve samimiyetiyle kendimi rahat hissettim. İç dünyamdaki sorunların kökenine inerek bana doğru yolları bulmamda yardımcı oldu. Kaçındığım konuları rahatsızlık vermeden, profesyonel bir şekilde ele aldı ve çözmemi sağladı. Görüşmelerde duygularımı anlamaya verdiği önem ve mesleğine olan hakimiyeti her an hissediliyor. Etik değerlere bağlı, güvenilir ve işinde uzman bir psikolog olarak kendisini çevremdekilere gönül rahatlığıyla tavsiye ettim ve etmeye devam ediyorum. Hayır diyebilmeyi, sınır çizmeyi ve kendime değer vermeyi Meryem Hanım sayesinde öğrendim. İç dünyasında destek arayan herkese kendisini tavsiye ederim. Danışmanlık sürecimin sonuna kadar memnuniyet ile devam edeceğime inanıyorum."
-            </p>
-            <p class="testimonial-author">— F.I.</p>
-          </div>
-
-          <div class="testimonial" style="margin-bottom: var(--space-md);">
-            <p class="testimonial-quote">
-              "Meryem Hanım'a bir arkadaşımın yönlendirmesiyle başvurdum. Öncelikle çok mutsuz hissetmemden dolayı ve çok sık pozitif ile negatif duygular arasında geçiş yaşamamdan dolayı başvurmuştum. Fakat sorunların kökenine inerek aslında nereden kaynaklandığını beraber fark ettik. Yaşadığım duyguları anlamama ve duygunun içinde kalmama çok yardımcı oldu ve hala da yardımını almaya devam ediyorum. Görüşmede kaçmak istediğim konuların aslında üzerinde durulması gereken konular olması ile birlikte kendisi bu durumu oldukça profesyonel yönetiyor. Danışanının anlattıklarını bakış açısını duygularını anlamak için emek veren başarılı bir psikolog olduğunu düşünüyorum. Etik kurallara da uygun çalıştığını söylemem gerekli. Kendisiyle neredeyse 2 yıldır devam ettirdiğimiz görüşmelerden ben kendi şahsıma oldukça faydasını gördüm ve hayatımda çok şey değişti. Kendisini daha önce de çevremdeki insanlara tavsiye etmiştim."
-            </p>
-            <p class="testimonial-author">— H.C.</p>
-          </div>
-
-          <div class="testimonial" style="margin-bottom: var(--space-md);">
-            <p class="testimonial-quote">
-              "6 şubat depreminden sonra çok zor günler geçirdiğim dönemde karşıma çıkan, sonrasında da çok faydasını gördüğüm çok içten, sorunlara çözüm odaklı ve samimi bir psikolog. Kendisini tanıdığım için şanslıyım."
-            </p>
-            <p class="testimonial-author">— D.A.</p>
-          </div>
-
-          <div class="testimonial" style="margin-bottom: var(--space-md);">
-            <p class="testimonial-quote">
-              "Harika bir insan ilk başladığımda tedirgin ve çekingendim ama aldığım pozitif enerji ile kendimi rahat ve güvende hissettim çok faydasını gördüm iyi ki tanımışım sizi..."
-            </p>
-            <p class="testimonial-author">— E.O.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Son Blog Yazıları -->
     <section class="section section-alt">
       <div class="container">
-        <h2 class="text-center mb-md">Blog'dan Son Yazılar</h2>
+        <h2 class="text-center mb-md reveal">Blog'dan Son Yazılar</h2>
         <p class="text-center mb-lg" style="max-width: 700px; margin-left: auto; margin-right: auto; color: var(--color-text-light);">
           Ruh sağlığı ve kişisel gelişim hakkında bilgilendirici içerikler.
         </p>
