@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
   triggerPageViewEvents();
   initInstagramPlaceholder();
   initDateRestrictions();
+  initScrollReveal();
+  initTestimonialSlider();
 });
 
 /**
@@ -728,47 +730,107 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * DANIŞAN YORUMLARI
- * Metin genişletme/daraltma ve modal fonksiyonları
+ * DANIŞAN YORUMLARI - SLIDER/CAROUSEL
+ * Sürükle & kaydır, buton navigasyonu, dot göstergesi
  */
-function toggleTestimonial(button) {
-  const quote = button.previousElementSibling;
-  const isExpanded = quote.classList.contains('expanded');
+function initTestimonialSlider() {
+  const slider = document.getElementById('testimonialSlider');
+  if (!slider) return;
 
-  if (isExpanded) {
-    quote.classList.remove('expanded');
-    button.textContent = 'Devamını Oku';
-  } else {
-    quote.classList.add('expanded');
-    button.textContent = 'Daralt';
+  const track = slider.querySelector('.testimonial-slider-track');
+  const slides = slider.querySelectorAll('.testimonial-slide');
+  const prevBtn = slider.querySelector('.slider-prev');
+  const nextBtn = slider.querySelector('.slider-next');
+  const dotsContainer = document.getElementById('sliderDots');
+
+  if (!track || slides.length === 0) return;
+
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+
+  // Dot'ları oluştur
+  slides.forEach(function(_, i) {
+    const dot = document.createElement('button');
+    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Yorum ' + (i + 1));
+    dot.addEventListener('click', function() { goToSlide(i); });
+    dotsContainer.appendChild(dot);
+  });
+
+  function goToSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+    currentIndex = index;
+    track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+
+    // Dot'ları güncelle
+    var dots = dotsContainer.querySelectorAll('.slider-dot');
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === currentIndex);
+    });
   }
-}
 
-function openTestimonialsModal() {
-  const modal = document.getElementById('testimonialsModal');
-  if (modal) {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-}
+  prevBtn.addEventListener('click', function() { goToSlide(currentIndex - 1); });
+  nextBtn.addEventListener('click', function() { goToSlide(currentIndex + 1); });
 
-function closeTestimonialsModal(event) {
-  const modal = document.getElementById('testimonialsModal');
-  if (!event || event.target === modal || event.target.classList.contains('testimonials-modal-close')) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-}
+  // Touch/swipe desteği
+  let startX = 0;
+  let isDragging = false;
 
-// ESC tuşu ile testimonials modalı kapat
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    const modal = document.getElementById('testimonialsModal');
-    if (modal && modal.classList.contains('active')) {
-      closeTestimonialsModal();
+  track.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, { passive: true });
+
+  track.addEventListener('touchend', function(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goToSlide(currentIndex + 1);
+      else goToSlide(currentIndex - 1);
     }
+  }, { passive: true });
+
+  // Otomatik geçiş (6 saniyede bir)
+  var autoplay = setInterval(function() { goToSlide(currentIndex + 1); }, 6000);
+
+  // Slider üzerine gelindiğinde otomatik geçişi durdur
+  slider.addEventListener('mouseenter', function() { clearInterval(autoplay); });
+  slider.addEventListener('mouseleave', function() {
+    autoplay = setInterval(function() { goToSlide(currentIndex + 1); }, 6000);
+  });
+}
+
+/**
+ * SCROLL REVEAL ANİMASYONLARI
+ * Intersection Observer ile performanslı fade-in-up efekti
+ */
+function initScrollReveal() {
+  var revealElements = document.querySelectorAll('.reveal');
+
+  if (revealElements.length === 0) return;
+
+  // Reduced motion tercihini kontrol et
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealElements.forEach(function(el) { el.classList.add('visible'); });
+    return;
   }
-});
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealElements.forEach(function(el) { observer.observe(el); });
+}
 
 // Console'da bilgi
 console.log('%c🌟 Psikolog Web Sitesi', 'font-size: 16px; font-weight: bold; color: #d4a574;');
