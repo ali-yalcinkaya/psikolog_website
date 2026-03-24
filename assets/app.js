@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initDateRestrictions();
   initScrollReveal();
   initTestimonialSlider();
+  initSpeedDial();
 });
 
 /**
@@ -830,6 +831,49 @@ function initScrollReveal() {
   });
 
   revealElements.forEach(function(el) { observer.observe(el); });
+}
+
+/**
+ * SPEED DIAL (Sabit İletişim Butonu)
+ * Tek buton tıklandığında WhatsApp, Telefon, Mail açılır
+ */
+function initSpeedDial() {
+  var dial = document.getElementById('speedDial');
+  var trigger = document.getElementById('speedDialTrigger');
+
+  if (!dial || !trigger) return;
+
+  // Overlay oluştur
+  var overlay = document.createElement('div');
+  overlay.className = 'speed-dial-overlay';
+  document.body.appendChild(overlay);
+
+  function toggleDial() {
+    var isOpen = dial.classList.contains('open');
+    dial.classList.toggle('open');
+    overlay.classList.toggle('active');
+    trigger.setAttribute('aria-expanded', !isOpen);
+  }
+
+  function closeDial() {
+    dial.classList.remove('open');
+    overlay.classList.remove('active');
+    trigger.setAttribute('aria-expanded', 'false');
+  }
+
+  trigger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    toggleDial();
+  });
+
+  overlay.addEventListener('click', closeDial);
+
+  // ESC ile kapat
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && dial.classList.contains('open')) {
+      closeDial();
+    }
+  });
 }
 
 // Console'da bilgi
