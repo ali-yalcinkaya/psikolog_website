@@ -2185,17 +2185,13 @@ img {
 .instagram-embed-grid > div {
   position: relative;
   max-height: 600px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.instagram-embed-grid > div::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to bottom, transparent, #fafafa);
-  pointer-events: none;
+.instagram-embed-grid > div::-webkit-scrollbar {
+  display: none;
 }
 
 /* Instagram Embed Grid - Responsive */
