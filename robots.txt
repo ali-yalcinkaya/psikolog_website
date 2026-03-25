@@ -15,7 +15,7 @@ Allow: /sss.html
 Allow: /assets/
 
 # Sitemap
-Sitemap: https://ali-yalcinkaya.github.io/psikolog_website/sitemap.xml
+Sitemap: https://www.psikologlarmeryemzeynep.com/sitemap.xml
 
 # Crawl-delay (isteğe bağlı - sunucu yükünü azaltmak için)
 # Crawl-delay: 1

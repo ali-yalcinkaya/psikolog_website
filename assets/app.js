@@ -171,15 +171,16 @@ function initAppointmentForm() {
       formData.email = email.value.trim();
     }
 
-    // Telefon
+    // Telefon (Türkiye formatı: 05XX XXX XX XX veya +905XX...)
     const phone = form.querySelector('#phone');
-    const phonePattern = /^[0-9]{10,11}$/;
-    const cleanPhone = phone.value.replace(/\s|-|\(|\)/g, '');
+    const cleanPhone = phone.value.replace(/[\s\-\(\)\+]/g, '');
+    const phonePatternLocal = /^0[5][0-9]{9}$/;
+    const phonePatternIntl = /^90[5][0-9]{9}$/;
     if (!cleanPhone) {
       showError(phone, 'Telefon numarası zorunludur.');
       isValid = false;
-    } else if (!phonePattern.test(cleanPhone)) {
-      showError(phone, 'Geçerli bir telefon numarası giriniz (10-11 haneli).');
+    } else if (!phonePatternLocal.test(cleanPhone) && !phonePatternIntl.test(cleanPhone)) {
+      showError(phone, 'Geçerli bir telefon numarası giriniz (ör: 05XX XXX XX XX).');
       isValid = false;
     } else {
       formData.phone = cleanPhone;

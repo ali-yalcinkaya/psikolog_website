@@ -414,6 +414,17 @@ img {
   color: #ffffff;
 }
 
+.btn-ghost {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.btn-ghost:hover {
+  background-color: #ffffff;
+  color: var(--color-text);
+}
+
 .btn-large {
   padding: 1.125rem 2.5rem;
   font-size: 1.125rem;
