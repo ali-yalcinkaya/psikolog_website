@@ -123,113 +123,121 @@
                 <p class="hidden" style="display:none!important">
                   <label>Bu alanı doldurmayın: <input name="bot-field"></label>
                 </p>
-                <!-- Ad Soyad -->
-                <div class="form-group">
-                  <label for="name" class="form-label required">Ad Soyad</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    class="form-input"
-                    placeholder="Adınız ve soyadınız"
-                    required
-                    aria-required="true"
-                    aria-invalid="false">
-                  <div class="form-error" role="alert"></div>
+
+                <!-- Grup A: Sizi Tanıyalım -->
+                <div class="form-section">
+                  <div class="form-section-header">
+                    <span class="form-section-title">Sizi tanıyalım</span>
+                    <span class="form-section-note">Zorunlu alanlar</span>
+                  </div>
+
+                  <!-- Ad Soyad -->
+                  <div class="form-group">
+                    <label for="name" class="form-label required">Ad Soyad</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      class="form-input"
+                      placeholder="Adınız ve soyadınız"
+                      required
+                      aria-required="true"
+                      aria-invalid="false">
+                    <div class="form-error" role="alert"></div>
+                  </div>
+
+                  <!-- E-posta -->
+                  <div class="form-group">
+                    <label for="email" class="form-label required">E-posta Adresi</label>
+                    <div class="form-input-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-input"
+                        placeholder="ornek@email.com"
+                        required
+                        aria-required="true"
+                        aria-invalid="false">
+                    </div>
+                    <div class="form-error" role="alert"></div>
+                  </div>
+
+                  <!-- Telefon -->
+                  <div class="form-group">
+                    <label for="phone" class="form-label required">Telefon Numarası</label>
+                    <div class="form-input-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        class="form-input"
+                        placeholder="05XX XXX XX XX"
+                        required
+                        aria-required="true"
+                        aria-invalid="false">
+                    </div>
+                    <div class="form-error" role="alert"></div>
+                  </div>
                 </div>
 
-                <!-- E-posta -->
-                <div class="form-group">
-                  <label for="email" class="form-label required">E-posta Adresi</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="form-input"
-                    placeholder="ornek@email.com"
-                    required
-                    aria-required="true"
-                    aria-invalid="false">
-                  <div class="form-error" role="alert"></div>
-                </div>
+                <!-- Grup B: Görüşme Tercihleri -->
+                <div class="form-section">
+                  <div class="form-section-header">
+                    <span class="form-section-title">Görüşme tercihleri</span>
+                    <span class="form-section-note">Opsiyonel</span>
+                  </div>
 
-                <!-- Telefon -->
-                <div class="form-group">
-                  <label for="phone" class="form-label required">Telefon Numarası</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    class="form-input"
-                    placeholder="0555 555 55 55"
-                    required
-                    aria-required="true"
-                    aria-invalid="false">
-                  <div class="form-error" role="alert"></div>
-                  <small style="color: var(--color-text-lighter); font-size: 0.875rem; display: block; margin-top: 0.25rem;">
-                    Örnek: 05555555555 (10-11 haneli)
-                  </small>
-                </div>
+                  <!-- Tercih Edilen Tarih -->
+                  <div class="form-group">
+                    <label for="preferred-date" class="form-label">Tercih Edilen Tarih</label>
+                    <input
+                      type="date"
+                      id="preferred-date"
+                      name="preferred-date"
+                      class="form-input"
+                      aria-invalid="false">
+                  </div>
 
-                <!-- Tercih Edilen Tarih -->
-                <div class="form-group">
-                  <label for="preferred-date" class="form-label">Tercih Edilen Tarih</label>
-                  <input
-                    type="date"
-                    id="preferred-date"
-                    name="preferred-date"
-                    class="form-input"
-                    aria-invalid="false">
-                  <small style="color: var(--color-text-lighter); font-size: 0.875rem; display: block; margin-top: 0.25rem;">
-                    Opsiyonel - Tercih ettiğiniz randevu tarihini belirtebilirsiniz
-                  </small>
-                </div>
+                  <!-- Tercih Edilen Saat -->
+                  <div class="form-group">
+                    <label for="preferred-time" class="form-label">Tercih Edilen Saat</label>
+                    <select id="preferred-time" name="preferred-time" class="form-select">
+                      <option value="">Seçiniz</option>
+                      <option value="09:00-12:00">Sabah (09:00 - 12:00)</option>
+                      <option value="12:00-15:00">Öğle (12:00 - 15:00)</option>
+                      <option value="15:00-18:00">İkindi (15:00 - 18:00)</option>
+                      <option value="18:00-21:00">Akşam (18:00 - 21:00)</option>
+                    </select>
+                  </div>
 
-                <!-- Tercih Edilen Saat -->
-                <div class="form-group">
-                  <label for="preferred-time" class="form-label">Tercih Edilen Saat</label>
-                  <select id="preferred-time" name="preferred-time" class="form-select">
-                    <option value="">Seçiniz</option>
-                    <option value="09:00-12:00">Sabah (09:00 - 12:00)</option>
-                    <option value="12:00-15:00">Öğle (12:00 - 15:00)</option>
-                    <option value="15:00-18:00">İkindi (15:00 - 18:00)</option>
-                    <option value="18:00-21:00">Akşam (18:00 - 21:00)</option>
-                  </select>
-                  <small style="color: var(--color-text-lighter); font-size: 0.875rem; display: block; margin-top: 0.25rem;">
-                    Opsiyonel - Genel olarak tercih ettiğiniz saat aralığı
-                  </small>
-                </div>
+                  <!-- Danışma Konusu -->
+                  <div class="form-group">
+                    <label for="topic" class="form-label">Danışma Konusu</label>
+                    <select id="topic" name="topic" class="form-select">
+                      <option value="">Seçiniz</option>
+                      <option value="anksiyete">Anksiyete ve Panik Atak</option>
+                      <option value="depresyon">Depresyon</option>
+                      <option value="iliski">İlişki ve Çift Danışmanlığı</option>
+                      <option value="travma">Travma ve PTSD</option>
+                      <option value="ergen">Ergen ve Genç Yetişkin Danışmanlığı</option>
+                      <option value="stres">Stres ve Yaşam Dengesi</option>
+                      <option value="diger">Diğer</option>
+                    </select>
+                  </div>
 
-                <!-- Danışma Konusu -->
-                <div class="form-group">
-                  <label for="topic" class="form-label">Danışma Konusu</label>
-                  <select id="topic" name="topic" class="form-select">
-                    <option value="">Seçiniz</option>
-                    <option value="anksiyete">Anksiyete ve Panik Atak</option>
-                    <option value="depresyon">Depresyon</option>
-                    <option value="iliski">İlişki ve Çift Danışmanlığı</option>
-                    <option value="travma">Travma ve PTSD</option>
-                    <option value="ergen">Ergen ve Genç Yetişkin Danışmanlığı</option>
-                    <option value="stres">Stres ve Yaşam Dengesi</option>
-                    <option value="diger">Diğer</option>
-                  </select>
-                  <small style="color: var(--color-text-lighter); font-size: 0.875rem; display: block; margin-top: 0.25rem;">
-                    Opsiyonel - Görüşmek istediğiniz konu
-                  </small>
-                </div>
-
-                <!-- Mesaj / Ek Bilgi -->
-                <div class="form-group">
-                  <label for="message" class="form-label">Mesajınız / Ek Bilgi</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    class="form-textarea"
-                    rows="5"
-                    placeholder="Randevunuzla ilgili eklemek istediğiniz bilgiler (opsiyonel)"></textarea>
-                  <small style="color: var(--color-text-lighter); font-size: 0.875rem; display: block; margin-top: 0.25rem;">
-                    Opsiyonel - Belirtmek istediğiniz özel durumlar
-                  </small>
+                  <!-- Mesaj / Ek Bilgi -->
+                  <div class="form-group">
+                    <label for="message" class="form-label">Mesajınız / Ek Bilgi</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      class="form-textarea"
+                      rows="4"
+                      placeholder="Randevunuzla ilgili eklemek istediğiniz bilgiler..."></textarea>
+                  </div>
                 </div>
 
                 <!-- KVKK Onayı -->
@@ -244,13 +252,11 @@
                 </div>
 
                 <!-- Gönder Butonu -->
-                <button type="submit" class="btn btn-primary btn-block btn-large">
-                  Randevu Talebini Gönder
-                </button>
-
-                <p style="text-align: center; margin-top: var(--space-md); font-size: 0.875rem; color: var(--color-text-lighter);">
-                  * işaretli alanlar zorunludur
-                </p>
+                <div style="display: flex; justify-content: flex-end; margin-top: var(--space-lg);">
+                  <button type="submit" class="btn btn-primary btn-large">
+                    Randevu Talebini Gönder →
+                  </button>
+                </div>
               </form>
             </div>
           </div>
