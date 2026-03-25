@@ -1984,7 +1984,7 @@ img {
   .hero-text {
     flex: 1;
     justify-content: center;
-    padding: 3rem 3.5rem;
+    padding: var(--space-xl) var(--space-xl);
   }
 }
 
@@ -1995,6 +1995,10 @@ img {
 
   .hero-photo {
     width: 42%;
+  }
+
+  .hero-text {
+    padding: var(--space-xl) var(--space-2xl);
   }
 }
 
