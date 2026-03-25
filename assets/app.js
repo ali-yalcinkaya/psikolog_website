@@ -223,41 +223,43 @@ function initAppointmentForm() {
       return;
     }
 
-    // Form geçerli - Gönderim simülasyonu
-    console.log('Form Verileri:', formData);
+    // Form geçerli - Netlify Forms ile gönder
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Gönderiliyor...';
 
-    // Google Ads dönüşüm eventi
-    window.dataLayer.push({
-      event: 'lead_submit',
-      form_type: 'appointment',
-      form_data: formData
-    });
+    // Netlify Forms için form verisini hazırla
+    const netlifyData = new FormData(form);
 
-    // Başarı mesajını göster
-    showSuccessMessage(form);
-
-    // Formu sıfırla
-    form.reset();
-
-    // Gerçek ortamda burada API'ye POST isteği atılacak:
-    /*
-    fetch('/api/appointments', {
+    fetch('/', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(netlifyData).toString()
     })
-    .then(response => response.json())
-    .then(data => {
+    .then(function(response) {
+      if (!response.ok) throw new Error('Form gönderilemedi');
+
+      // Google Ads dönüşüm eventi
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: 'lead_submit',
+          form_type: 'appointment',
+          form_data: formData
+        });
+      }
+
+      // Başarı mesajını göster
       showSuccessMessage(form);
       form.reset();
     })
-    .catch(error => {
-      console.error('Hata:', error);
-      alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.');
+    .catch(function(error) {
+      console.error('Form gönderim hatası:', error);
+      alert('Form gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin veya WhatsApp üzerinden iletişime geçin.');
+    })
+    .finally(function() {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Randevu Talebini Gönder';
     });
-    */
   });
 }
 
