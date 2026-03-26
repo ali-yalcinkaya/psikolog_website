@@ -211,7 +211,7 @@ img {
 }
 
 .logo img {
-  height: 120px;
+  height: 80px;
   width: auto;
   display: block;
 }
@@ -2213,7 +2213,7 @@ img {
   }
 
   .logo img {
-    height: 80px;
+    height: 56px;
   }
 
   .menu-toggle {
