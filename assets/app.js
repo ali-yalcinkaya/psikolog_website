@@ -882,3 +882,93 @@ function initSpeedDial() {
 // Console'da bilgi
 console.log('%c🌟 Psikolog Web Sitesi', 'font-size: 16px; font-weight: bold; color: #d4a574;');
 console.log('%cErişilebilir, hızlı ve modern bir web deneyimi.', 'color: #5a5a5a;');
+
+/**
+ * BLOG GÖNDERİ YÜKLEYİCİ
+ * _posts/index.json'dan yazıları okur, kartları oluşturur ve DOM'a ekler.
+ * blog.html ve index.html tarafından kullanılır.
+ */
+
+var BLOG_FALLBACK_IMG = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23fce2ba%22 width=%22400%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%232b2b2b%22%3EBlog G%C3%B6rseli%3C%2Ftext%3E%3C%2Fsvg%3E";
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  try {
+    var d = new Date(dateStr + 'T00:00:00');
+    var months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+                  'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  } catch (e) { return dateStr; }
+}
+
+function buildBlogCard(post) {
+  var article = document.createElement('article');
+  article.className = 'blog-card';
+  if (post.category) {
+    article.dataset.category = post.category
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[ıİ]/g, 'i')
+      .replace(/[şŞ]/g, 's')
+      .replace(/[ğĞ]/g, 'g')
+      .replace(/[üÜ]/g, 'u')
+      .replace(/[öÖ]/g, 'o')
+      .replace(/[çÇ]/g, 'c');
+  }
+  var slug = post.file.replace(/\.md$/, '');
+  var href = 'blog-detay.html?post=' + encodeURIComponent(slug);
+  var thumb = post.thumbnail || BLOG_FALLBACK_IMG;
+  var date = formatDate(post.date);
+  var readStr = post.readingTime ? post.readingTime + ' dk okuma' : '';
+
+  var img = document.createElement('img');
+  img.src = thumb;
+  img.alt = post.title || '';
+  img.className = 'blog-card-image';
+  img.loading = 'lazy';
+  img.onerror = function () { this.onerror = null; this.src = BLOG_FALLBACK_IMG; };
+
+  var inner = '<div class="blog-card-content">' +
+    '<span class="blog-category">' + (post.category || '') + '</span>' +
+    '<h3 class="blog-card-title"><a href="' + href + '">' + (post.title || '') + '</a></h3>' +
+    '<div class="blog-meta">' +
+    '<span class="blog-meta-item"><span aria-hidden="true">📅</span> ' + date + '</span>' +
+    (readStr ? '<span class="blog-meta-item"><span aria-hidden="true">⏱</span> ' + readStr + '</span>' : '') +
+    '</div>' +
+    '<p class="blog-excerpt">' + (post.excerpt || '') + '</p>' +
+    '<a href="' + href + '" class="blog-read-more">Devamını Oku <span aria-hidden="true">→</span></a>' +
+    '</div>';
+
+  article.appendChild(img);
+  article.insertAdjacentHTML('beforeend', inner);
+  return article;
+}
+
+async function loadBlogPosts(container, limit) {
+  if (!container) return;
+  try {
+    var res = await fetch('/_posts/index.json');
+    if (!res.ok) return;
+    var posts = await res.json();
+    if (!Array.isArray(posts) || posts.length === 0) return;
+    if (limit) posts = posts.slice(0, limit);
+    container.innerHTML = '';
+    posts.forEach(function (post) {
+      container.appendChild(buildBlogCard(post));
+    });
+    // blog.html'deki filtre/arama için allBlogPosts'u güncelle
+    if (typeof allBlogPosts !== 'undefined' && container.classList.contains('blog-grid')) {
+      allBlogPosts = Array.from(container.querySelectorAll('.blog-card'));
+    }
+  } catch (e) {}
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // blog.html: tüm yazıları yükle
+  var blogGrid = document.querySelector('.blog-grid');
+  if (blogGrid) loadBlogPosts(blogGrid, null);
+
+  // index.html: son 3 yazıyı yükle
+  var homeBlogGrid = document.getElementById('home-blog-grid');
+  if (homeBlogGrid) loadBlogPosts(homeBlogGrid, 3);
+});

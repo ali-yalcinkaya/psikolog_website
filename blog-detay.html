@@ -36,6 +36,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
   <!-- Stylesheet -->
   <link rel="stylesheet" href="assets/styles.css">
+  <!-- Markdown parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
@@ -110,172 +112,23 @@
               <li aria-hidden="true">/</li>
               <li><a href="blog.html" style="color: var(--color-accent);">Blog</a></li>
               <li aria-hidden="true">/</li>
-              <li aria-current="page">Anksiyete ile Başa Çıkmanın 7 Etkili Yolu</li>
+              <li aria-current="page"><span id="post-breadcrumb"></span></li>
             </ol>
           </nav>
 
-          <!-- Blog Header -->
+          <!-- Blog Header (JavaScript ile doldurulur) -->
           <header class="blog-header">
-            <span class="blog-category">Anksiyete</span>
-            <h1 class="blog-title">Anksiyete ile Başa Çıkmanın 7 Etkili Yolu</h1>
-
-            <div class="blog-meta">
-              <span class="blog-meta-item">
-                <span aria-hidden="true">✍️</span>
-                Meryem Zeynep Uğurlu
-              </span>
-              <span class="blog-meta-item">
-                <span aria-hidden="true">📅</span>
-                15 Ocak 2025
-              </span>
-              <span class="blog-meta-item">
-                <span aria-hidden="true">⏱</span>
-                5 dk okuma
-              </span>
-            </div>
+            <span class="blog-category" id="post-category"></span>
+            <h1 class="blog-title" id="post-title"></h1>
+            <div class="blog-meta" id="post-meta"></div>
           </header>
 
-          <!-- Featured Image -->
-          <img src="assets/img/blog1.webp"
-               alt="Anksiyete ile başa çıkma yöntemleri"
-               class="blog-featured-image"
-               loading="eager"
-               onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22%3E%3Crect fill=%22%23fce2ba%22 width=%22800%22 height=%22500%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%232b2b2b%22%3EBlog G%C3%B6rseli%3C/text%3E%3C/svg%3E'">
+          <!-- Featured Image (JavaScript ile doldurulur) -->
+          <img id="post-image" class="blog-featured-image" loading="eager" alt="" style="display:none"
+               onerror="this.style.display='none'">
 
-          <!-- Blog Content -->
-          <div class="blog-content">
-            <p>
-              Anksiyete, modern yaşamın en yaygın ruh sağlığı sorunlarından biridir.
-              Sürekli endişe, tedirginlik ve fiziksel belirtilerle kendini gösterebilir.
-              Ancak iyi haber şu ki: Anksiyete yönetilebilir bir durumdur.
-            </p>
-
-            <p>
-              Bu yazıda, bilimsel araştırmalarla desteklenmiş, anksiyete ile başa çıkmanıza
-              yardımcı olacak 7 etkili yöntemi paylaşacağım. Bu teknikleri düzenli olarak
-              uyguladığınızda, anksiyete semptomlarınızda önemli ölçüde azalma görebilirsiniz.
-            </p>
-
-            <h2>1. Derin Nefes Egzersizleri</h2>
-
-            <p>
-              Anksiyete sırasında vücudumuzun stres tepkisi aktifleşir ve nefes alışverişimiz
-              hızlanır. Derin nefes egzersizleri, bu tepkiyi tersine çevirebilir ve
-              sakinleşmenize yardımcı olabilir.
-            </p>
-
-            <p>
-              <strong>Diyafram nefesi tekniği:</strong>
-            </p>
-            <ul>
-              <li>Rahat bir pozisyonda oturun veya uzanın</li>
-              <li>Bir elinizi göğsünüze, diğerini karnınıza koyun</li>
-              <li>Burnunuzdan 4 saniye boyunca derin nefes alın (karnınız şişmeli)</li>
-              <li>7 saniye nefesi tutun</li>
-              <li>Ağzınızdan 8 saniye boyunca yavaşça nefes verin</li>
-              <li>Bu döngüyü 5-10 kez tekrarlayın</li>
-            </ul>
-
-            <h2>2. Progresif Kas Gevşetme</h2>
-
-            <p>
-              Bu teknik, kaslarınızı sistematik olarak gerip gevşeterek fiziksel gerilimi
-              azaltır. Bedeniniz rahatladığında, zihinsel olarak da sakinleşirsiniz.
-            </p>
-
-            <p>
-              Ayak parmaklarınızdan başlayarak yukarı doğru ilerleyin. Her kas grubunu
-              5-10 saniye boyunca sıkın, sonra 20 saniye gevşetin. Baş bölgenize kadar
-              devam edin.
-            </p>
-
-            <h2>3. Olumsuz Düşünceleri Sorgulama</h2>
-
-            <p>
-              Anksiyete genellikle abartılmış veya gerçekçi olmayan endişelerle beslenir.
-              Kanıta dayalı danışmanlık tekniklerini kullanarak bu düşünceleri
-              sorgulayabilirsiniz.
-            </p>
-
-            <blockquote>
-              "Endişelendiğim şeyin gerçekten olma olasılığı nedir? En kötü senaryoda
-              ne olabilir ve bununla nasıl başa çıkabilirim? Bu duruma daha dengeli bir
-              bakış açısı nedir?"
-            </blockquote>
-
-            <p>
-              Bu soruları kendinize sorarak, düşüncelerinizi daha gerçekçi bir zemine
-              oturtabilirsiniz.
-            </p>
-
-            <h2>4. Mindfulness ve Meditasyon</h2>
-
-            <p>
-              Mindfulness (farkındalık) pratiği, dikkatinizi şimdiki ana odaklamanızı
-              sağlar. Araştırmalar, düzenli mindfulness uygulamasının anksiyeteyi önemli
-              ölçüde azalttığını göstermektedir.
-            </p>
-
-            <p>
-              <strong>Basit bir mindfulness egzersizi:</strong> 5 dakika boyunca sadece
-              nefesinize odaklanın. Zihniniz dağıldığında, nazikçe dikkatinizi tekrar
-              nefese geri getirin. Bu kadar basit!
-            </p>
-
-            <h2>5. Fiziksel Aktivite</h2>
-
-            <p>
-              Düzenli egzersiz, vücudun doğal stres giderici kimyasallarını (endorfinler)
-              serbest bırakır. Haftada en az 150 dakika orta yoğunlukta aktivite hedefleyin.
-            </p>
-
-            <p>
-              Yürüyüş, koşu, yoga, dans - sizin için en keyifli olanı seçin. Önemli olan
-              düzenli hareket etmektir.
-            </p>
-
-            <h2>6. Uyku Hijyenini İyileştirme</h2>
-
-            <p>
-              Yetersiz uyku anksiyeteyi kötüleştirebilir. İyi bir uyku rutini oluşturmak
-              çok önemlidir:
-            </p>
-
-            <ul>
-              <li>Her gün aynı saatte yatıp kalkın</li>
-              <li>Yatmadan 1-2 saat önce ekran kullanımını azaltın</li>
-              <li>Yatak odanızı serin, karanlık ve sessiz tutun</li>
-              <li>Kafein ve alkol tüketimini sınırlandırın</li>
-            </ul>
-
-            <h2>7. Profesyonel Destek Alma</h2>
-
-            <p>
-              Eğer anksiyete semptomlarınız günlük yaşamınızı ciddi şekilde etkiliyorsa,
-              profesyonel yardım almaktan çekinmeyin. Psikolojik danışmanlık,
-              anksiyete ile mücadelede son derece etkilidir.
-            </p>
-
-            <p>
-              Bir psikolog ile çalışmak, size özel stratejiler geliştirmenize ve anksiyetenin
-              altında yatan nedenleri anlamanıza yardımcı olabilir.
-            </p>
-
-            <h2>Sonuç</h2>
-
-            <p>
-              Anksiyete ile başa çıkmak bir süreçtir ve sabır gerektirir. Bu 7 yöntemi
-              hayatınıza entegre ederek, anksiyete semptomlarınızda önemli bir iyileşme
-              görebilirsiniz. Unutmayın, her bireyin deneyimi farklıdır - size en uygun
-              olanı bulmak için çeşitli teknikleri denemeyi göze alın.
-            </p>
-
-            <p>
-              Eğer anksiyete ile mücadele ediyorsanız ve profesyonel destek almak
-              isterseniz, benimle iletişime geçmekten çekinmeyin. Birlikte, sizin için
-              en etkili tedavi planını oluşturabiliriz.
-            </p>
-          </div>
+          <!-- Blog Content (JavaScript ile doldurulur) -->
+          <div class="blog-content" id="post-content"></div>
 
           <!-- Paylaşım Butonları -->
           <div class="blog-share">
@@ -300,70 +153,10 @@
             </div>
           </div>
 
-          <!-- İlgili Yazılar -->
+          <!-- İlgili Yazılar (JavaScript ile doldurulur) -->
           <div class="related-posts">
             <h3>İlgili Yazılar</h3>
-            <div class="related-posts-grid">
-              <article class="blog-card">
-                <img src="assets/img/blog7.webp"
-                     alt="Sosyal anksiyete"
-                     class="blog-card-image"
-                     loading="lazy"
-                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23fce2ba%22 width=%22400%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%232b2b2b%22%3EBlog G%C3%B6rseli%3C/text%3E%3C/svg%3E'">
-                <div class="blog-card-content">
-                  <span class="blog-category">Anksiyete</span>
-                  <h3 class="blog-card-title">
-                    <a href="blog-detay.html">Sosyal Anksiyete: Nedir ve Nasıl Üstesinden Gelinir?</a>
-                  </h3>
-                  <p class="blog-excerpt">
-                    Sosyal ortamlarda aşırı kaygı duymak hayatınızı sınırlıyor mu?
-                  </p>
-                  <a href="blog-detay.html" class="blog-read-more">
-                    Devamını Oku <span aria-hidden="true">→</span>
-                  </a>
-                </div>
-              </article>
-
-              <article class="blog-card">
-                <img src="assets/img/blog4.webp"
-                     alt="Mindfulness"
-                     class="blog-card-image"
-                     loading="lazy"
-                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23fce2ba%22 width=%22400%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%232b2b2b%22%3EBlog G%C3%B6rseli%3C/text%3E%3C/svg%3E'">
-                <div class="blog-card-content">
-                  <span class="blog-category">Kişisel Gelişim</span>
-                  <h3 class="blog-card-title">
-                    <a href="blog-detay.html">Mindfulness: Şimdiki Ana Odaklanmanın Gücü</a>
-                  </h3>
-                  <p class="blog-excerpt">
-                    Mindfulness pratiği nasıl yapılır? Başlangıç egzersizlerini keşfedin.
-                  </p>
-                  <a href="blog-detay.html" class="blog-read-more">
-                    Devamını Oku <span aria-hidden="true">→</span>
-                  </a>
-                </div>
-              </article>
-
-              <article class="blog-card">
-                <img src="assets/img/blog5.webp"
-                     alt="Stres yönetimi"
-                     class="blog-card-image"
-                     loading="lazy"
-                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23fce2ba%22 width=%22400%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%232b2b2b%22%3EBlog G%C3%B6rseli%3C/text%3E%3C/svg%3E'">
-                <div class="blog-card-content">
-                  <span class="blog-category">Stres Yönetimi</span>
-                  <h3 class="blog-card-title">
-                    <a href="blog-detay.html">İş Stresiyle Başa Çıkma: Pratik Öneriler</a>
-                  </h3>
-                  <p class="blog-excerpt">
-                    Tükenmişlik sendromundan korunmak için etkili stratejiler.
-                  </p>
-                  <a href="blog-detay.html" class="blog-read-more">
-                    Devamını Oku <span aria-hidden="true">→</span>
-                  </a>
-                </div>
-              </article>
-            </div>
+            <div class="related-posts-grid" id="related-posts-grid"></div>
           </div>
         </div>
       </div>
@@ -484,5 +277,124 @@
 
   <!-- JavaScript -->
   <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      var FALLBACK = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22%3E%3Crect fill=%22%23fce2ba%22 width=%22800%22 height=%22500%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2224%22 fill=%22%232b2b2b%22%3EBlog G%C3%B6rseli%3C%2Ftext%3E%3C%2Fsvg%3E";
+      var FALLBACK_SMALL = "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect fill=%22%23fce2ba%22 width=%22400%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%232b2b2b%22%3EBlog G%C3%B6rseli%3C%2Ftext%3E%3C%2Fsvg%3E";
+
+      function parseFrontMatter(text) {
+        var fm = {};
+        var match = text.match(/^---\n([\s\S]*?)\n---\n?/);
+        if (!match) return { fm: fm, body: text };
+        match[1].split('\n').forEach(function (line) {
+          var idx = line.indexOf(':');
+          if (idx === -1) return;
+          var key = line.slice(0, idx).trim();
+          var val = line.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
+          fm[key] = val;
+        });
+        return { fm: fm, body: text.slice(match[0].length) };
+      }
+
+      async function loadRelatedPosts(currentFile) {
+        try {
+          var res = await fetch('/_posts/index.json');
+          if (!res.ok) return;
+          var posts = await res.json();
+          var related = posts.filter(function (p) { return p.file !== currentFile; }).slice(0, 3);
+          var grid = document.getElementById('related-posts-grid');
+          if (!grid || related.length === 0) return;
+          var getDate = typeof formatDate === 'function' ? formatDate : function (d) { return d || ''; };
+          grid.innerHTML = related.map(function (post) {
+            var slug = post.file.replace(/\.md$/, '');
+            var href = 'blog-detay.html?post=' + encodeURIComponent(slug);
+            var thumb = post.thumbnail || FALLBACK_SMALL;
+            return '<article class="blog-card">' +
+              '<img src="' + thumb + '" alt="' + (post.title || '') + '" class="blog-card-image" loading="lazy" onerror="this.onerror=null;this.src=\'' + FALLBACK_SMALL + '\'">' +
+              '<div class="blog-card-content">' +
+              '<span class="blog-category">' + (post.category || '') + '</span>' +
+              '<h3 class="blog-card-title"><a href="' + href + '">' + (post.title || '') + '</a></h3>' +
+              '<div class="blog-meta"><span class="blog-meta-item"><span aria-hidden="true">📅</span> ' + getDate(post.date) + '</span></div>' +
+              '<p class="blog-excerpt">' + (post.excerpt || '') + '</p>' +
+              '<a href="' + href + '" class="blog-read-more">Devamını Oku <span aria-hidden="true">→</span></a>' +
+              '</div></article>';
+          }).join('');
+        } catch (e) {}
+      }
+
+      async function loadBlogPost() {
+        var params = new URLSearchParams(window.location.search);
+        var postSlug = params.get('post');
+        if (!postSlug) { window.location.href = 'blog.html'; return; }
+
+        try {
+          var res = await fetch('/_posts/' + encodeURIComponent(postSlug) + '.md');
+          if (!res.ok) throw new Error('not found');
+          var text = await res.text();
+          var parsed = parseFrontMatter(text);
+          var fm = parsed.fm;
+          var body = parsed.body;
+
+          // Sayfa başlığı
+          if (fm.title) document.title = fm.title + ' | Psikolog Blog';
+
+          // Breadcrumb
+          var bc = document.getElementById('post-breadcrumb');
+          if (bc) bc.textContent = fm.title || postSlug;
+
+          // Kategori
+          var catEl = document.getElementById('post-category');
+          if (catEl) catEl.textContent = fm.category || '';
+
+          // Başlık
+          var titleEl = document.getElementById('post-title');
+          if (titleEl) titleEl.textContent = fm.title || '';
+
+          // Meta (tarih + okuma süresi)
+          var getDate = typeof formatDate === 'function' ? formatDate : function (d) { return d || ''; };
+          var wordCount = body.replace(/[^\wğüşıöçĞÜŞİÖÇ\s]/g, ' ').split(/\s+/).filter(Boolean).length;
+          var readTime = Math.max(1, Math.round(wordCount / 200));
+          var metaEl = document.getElementById('post-meta');
+          if (metaEl) {
+            metaEl.innerHTML =
+              '<span class="blog-meta-item"><span aria-hidden="true">✍️</span> Meryem Zeynep Uğurlu</span>' +
+              '<span class="blog-meta-item"><span aria-hidden="true">📅</span> ' + getDate(fm.date) + '</span>' +
+              '<span class="blog-meta-item"><span aria-hidden="true">⏱</span> ' + readTime + ' dk okuma</span>';
+          }
+
+          // Kapak görseli
+          var imgEl = document.getElementById('post-image');
+          if (imgEl && fm.thumbnail) {
+            imgEl.src = fm.thumbnail;
+            imgEl.alt = fm.title || '';
+            imgEl.style.display = '';
+          }
+
+          // İçerik
+          var contentEl = document.getElementById('post-content');
+          if (contentEl) {
+            contentEl.innerHTML = typeof marked !== 'undefined'
+              ? marked.parse(body)
+              : '<pre style="white-space:pre-wrap">' + body + '</pre>';
+          }
+
+          // İlgili yazılar
+          loadRelatedPosts(postSlug + '.md');
+
+        } catch (e) {
+          var container = document.querySelector('.blog-article');
+          if (container) {
+            container.innerHTML =
+              '<div style="padding:4rem;text-align:center">' +
+              '<h2>Yazı bulunamadı</h2>' +
+              '<p style="margin-top:1rem"><a href="blog.html" style="color:var(--color-accent)">← Blog\'a dön</a></p>' +
+              '</div>';
+          }
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', loadBlogPost);
+    })();
+  </script>
 </body>
 </html>
