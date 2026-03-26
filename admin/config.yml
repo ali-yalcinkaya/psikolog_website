@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/img"
+public_folder: "/assets/img"
+
+locale: "tr"
+
+collections:
+  - name: "blog"
+    label: "Blog Yazıları"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Başlık", name: "title", widget: "string" }
+      - { label: "Yayın Tarihi", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Kategori", name: "category", widget: "string" }
+      - { label: "Kapak Görseli", name: "thumbnail", widget: "image", required: false }
+      - { label: "Özet", name: "excerpt", widget: "text" }
+      - { label: "İçerik", name: "body", widget: "markdown" }
