@@ -901,19 +901,23 @@ function formatDate(dateStr) {
   } catch (e) { return dateStr; }
 }
 
+function buildCategorySlug(category) {
+  return category
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[ıİ]/g, 'i')
+    .replace(/[şŞ]/g, 's')
+    .replace(/[ğĞ]/g, 'g')
+    .replace(/[üÜ]/g, 'u')
+    .replace(/[öÖ]/g, 'o')
+    .replace(/[çÇ]/g, 'c');
+}
+
 function buildBlogCard(post) {
   var article = document.createElement('article');
   article.className = 'blog-card';
   if (post.category) {
-    article.dataset.category = post.category
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[ıİ]/g, 'i')
-      .replace(/[şŞ]/g, 's')
-      .replace(/[ğĞ]/g, 'g')
-      .replace(/[üÜ]/g, 'u')
-      .replace(/[öÖ]/g, 'o')
-      .replace(/[çÇ]/g, 'c');
+    article.dataset.category = buildCategorySlug(post.category);
   }
   var slug = post.file.replace(/\.md$/, '');
   var href = 'blog-detay.html?post=' + encodeURIComponent(slug);
@@ -944,6 +948,49 @@ function buildBlogCard(post) {
   return article;
 }
 
+function updateBlogFilters(posts) {
+  var filtersContainer = document.querySelector('.blog-filters');
+  if (!filtersContainer) return;
+
+  // Yazılardaki benzersiz kategorileri topla (slug → orijinal ad)
+  var seen = {};
+  posts.forEach(function (post) {
+    if (post.category) {
+      var slug = buildCategorySlug(post.category);
+      if (!seen[slug]) seen[slug] = post.category;
+    }
+  });
+
+  // Mevcut "Tümü" butonunu sakla, diğerlerini temizle
+  var allBtn = filtersContainer.querySelector('[data-category="all"]');
+  filtersContainer.innerHTML = '';
+
+  if (allBtn) {
+    allBtn.className = 'blog-filter-btn active';
+    filtersContainer.appendChild(allBtn);
+  } else {
+    var newAllBtn = document.createElement('button');
+    newAllBtn.className = 'blog-filter-btn active';
+    newAllBtn.dataset.category = 'all';
+    newAllBtn.textContent = 'Tümü';
+    filtersContainer.appendChild(newAllBtn);
+  }
+
+  // Her kategori için buton ekle
+  Object.keys(seen).sort().forEach(function (slug) {
+    var btn = document.createElement('button');
+    btn.className = 'blog-filter-btn';
+    btn.dataset.category = slug;
+    btn.textContent = seen[slug];
+    filtersContainer.appendChild(btn);
+  });
+
+  // Event listener'ları yeniden bağla
+  filtersContainer.querySelectorAll('.blog-filter-btn').forEach(function (btn) {
+    btn.addEventListener('click', handleBlogFilter);
+  });
+}
+
 async function loadBlogPosts(container, limit) {
   if (!container) return;
   try {
@@ -951,6 +998,10 @@ async function loadBlogPosts(container, limit) {
     if (!res.ok) return;
     var posts = await res.json();
     if (!Array.isArray(posts) || posts.length === 0) return;
+    // blog.html'de filtre butonlarını yazıların kategorilerinden güncelle
+    if (!limit && container.classList.contains('blog-grid')) {
+      updateBlogFilters(posts);
+    }
     if (limit) posts = posts.slice(0, limit);
     container.innerHTML = '';
     posts.forEach(function (post) {
