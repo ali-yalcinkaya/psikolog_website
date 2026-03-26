@@ -203,19 +203,17 @@ img {
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--color-text);
+  line-height: 1;
 }
 
 .logo:hover {
-  color: var(--color-accent);
+  opacity: 0.85;
 }
 
 .logo img {
-  height: 40px;
+  height: 64px;
   width: auto;
+  display: block;
 }
 
 .nav-menu {
@@ -2212,6 +2210,10 @@ img {
   .header-container {
     position: relative;
     z-index: 1003;
+  }
+
+  .logo img {
+    height: 48px;
   }
 
   .menu-toggle {
